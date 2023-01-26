@@ -12,6 +12,13 @@ option.add_argument("no-sandbox")
 chrome = webdriver.Chrome(ChromeDriverManager().install(), options=option)
 chrome.get("https://shopping.naver.com/")
 wait = WebDriverWait(chrome, 10)
-el = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "input[type=text]")))
-print(el)
-chrome.close() 
+
+
+def find(wait, css_selector):
+    return wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, css_selector)))
+
+search = find(wait, "input[class=_searchInput_search_text_fSuJ6]")
+search.send_keys("RTX 4090")
+
+time.sleep(3)
+chrome.close()
