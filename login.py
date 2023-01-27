@@ -18,10 +18,8 @@ wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a#gnb_login_button'
 input_id = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input#id")))
 input_pw = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input#pw")))
 
-id = input("당신의 네이버 아이디를 입력해 주세요 : ")
-input_id.send_keys(id)
-pw = input("당신의 패스워드를 입력해 주세요 : ")
-input_pw.send_keys(pw)
+input_id.send_keys("dnjfdid14")
+input_pw.send_keys(os.getenv("비밀번호"))
 input_pw.send_keys("\n")
 
 time.sleep(5)
