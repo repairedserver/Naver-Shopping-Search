@@ -10,7 +10,7 @@ import pyperclip
 
 chrome = webdriver.Chrome(ChromeDriverManager().install())
 wait = WebDriverWait(chrome, 10)
-short_wait = WebDriverWait(chrome, 3)
+short_wait = WebDriverWait(chrome, 5)
 
 chrome.get("https://shopping.naver.com/")
 wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a#gnb_login_button'))).click()
@@ -18,7 +18,7 @@ wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a#gnb_login_button'
 input_id = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input#id")))
 input_pw = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input#pw")))
 
-#
+# 로그인 기능 --------------------------------------------
 pyperclip.copy("dnjfdid14")
 # input_id.send_keys(Keys.CONTROL, "v") # 윈도우 전용
 input_id.send_keys(Keys.COMMAND, "v") # 맥 전용
@@ -26,9 +26,17 @@ input_id.send_keys(Keys.COMMAND, "v") # 맥 전용
 pyperclip.copy("Your Password")
 input_pw.send_keys(Keys.COMMAND, "v")
 input_pw.send_keys("\n")
+# -----------------------------------------------------
 
-short_wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "a#gnb_logout_button")))
+wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "a#gnb_logout_button")))
 
+search = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input[class=_searchInput_search_text_fSuJ6]")))
+search.send_keys("RTX 4090\n")
 
+wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "a[class^=basicList_link__]")))
+titles = chrome.find_elements_by_css_selector("a[class^=basicList_link__]")
+
+for i in titles:
+    print(i.text)
 
 chrome.close()
