@@ -33,10 +33,16 @@ wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "a#gnb_logout_button
 search = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input[class=_searchInput_search_text_fSuJ6]")))
 search.send_keys("RTX 4090\n")
 
-wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "a[class^=basicList_link__]")))
-titles = chrome.find_elements_by_css_selector("a[class^=basicList_link__]")
+wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div[class^=basicList_info_area__]")))
+items = chrome.find_elements_by_css_selector("div[class^=basicList_info_area__]")
 
-for i in titles:
+for i in items:
+    # 광고 제외
+    try:
+        i.parent.parent.find_element_by_css_selector("button[class^=ad_")
+        continue
+    except:
+        pass
     print(i.text)
 
 chrome.close()
