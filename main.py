@@ -18,10 +18,10 @@ def find(wait, css_selector):
     return wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, css_selector)))
 
 search = find(wait, "input[class=_searchInput_search_text_fSuJ6]")
-search.send_keys("RTX 4090")
+search.send_keys("RTX 4090\n")
 
-button = find(wait, "button._searchInput_button_search_h79Dk")
-button.click()
+# button = find(wait, "button._searchInput_button_search_h79Dk")
+# button.click()
 
 time.sleep(3)
 chrome.close()
