@@ -9,7 +9,8 @@ import os
 import pyperclip
 
 chrome = webdriver.Chrome(ChromeDriverManager().install())
-wait = WebDriverWait(chrome, 100)
+wait = WebDriverWait(chrome, 10)
+short_wait = WebDriverWait(chrome, 3)
 
 chrome.get("https://shopping.naver.com/")
 wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a#gnb_login_button'))).click()
@@ -17,14 +18,17 @@ wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'a#gnb_login_button'
 input_id = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input#id")))
 input_pw = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input#pw")))
 
+#
 pyperclip.copy("dnjfdid14")
 # input_id.send_keys(Keys.CONTROL, "v") # 윈도우 전용
 input_id.send_keys(Keys.COMMAND, "v") # 맥 전용
 
-pyperclip.copy("@dnddk1052")
+pyperclip.copy("Your Password")
 input_pw.send_keys(Keys.COMMAND, "v")
 input_pw.send_keys("\n")
 
-wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "a#gnb_logout_button")))
+short_wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "a#gnb_logout_button")))
+
+
 
 chrome.close()
