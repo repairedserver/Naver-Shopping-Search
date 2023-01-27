@@ -32,10 +32,14 @@ wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "a#gnb_logout_button
 
 search = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input[class=_searchInput_search_text_fSuJ6]")))
 search.send_keys("RTX 4090\n")
-
 wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div[class^=basicList_info_area__]")))
-items = chrome.find_elements_by_css_selector("div[class^=basicList_info_area__]")
 
+# 스크롤
+for i in range(8):
+    chrome.execute_script("window.scrollBy(0, " + str((i + 1) * 1000) + ")")
+    time.sleep(1)
+
+items = chrome.find_elements_by_css_selector("div[class^=basicList_info_area__]")
 for i in items:
     # 광고 제외
     try:
@@ -43,6 +47,6 @@ for i in items:
         continue
     except:
         pass
-    print(i.text)
+    print(i.find_element_by_css_selector("a[class^=basicList_link__]").text)
 
 chrome.close()
